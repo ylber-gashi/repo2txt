@@ -3,7 +3,7 @@ async function extractZipContents(zipFile) {
     try {
         const zip = await JSZip.loadAsync(zipFile);
         const tree = [];
-        const gitignoreContent = ['.git/**'];
+        const gitignoreContent = ['.git/**', 'node_modules/**', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.ico', '**/*.webp', '**/*.bmp', '**/*.pdf', '**/*.zip', '**/*.tar', '**/*.gz', '**/*.rar', '**/*.7z', '**/*.mp3', '**/*.mp4', '**/*.mov', '**/*.avi', '**/*.mkv', '**/*.exe', '**/*.dll', '**/*.bin'];
         let pathZipMap = {};
 
         // Process each file in the zip

@@ -1,6 +1,14 @@
 // Display directory structure
 function displayDirectoryStructure(tree) {
-    tree = tree.filter(item => item.type === 'blob').sort(sortContents);
+    const binaryExtensions = ['.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.webp', '.bmp', '.pdf', '.zip', '.tar', '.gz', '.rar', '.7z', '.mp3', '.mp4', '.mov', '.avi', '.mkv', '.exe', '.dll', '.bin'];
+    tree = tree
+        .filter(item => {
+            if (item.type !== 'blob') return false;
+            const lowerPath = item.path.toLowerCase();
+            if (lowerPath.split('/').includes('node_modules')) return false;
+            return !binaryExtensions.some(ext => lowerPath.endsWith(ext));
+        })
+        .sort(sortContents);
     const container = document.getElementById('directoryStructure');
     container.innerHTML = '';
     const rootUl = document.createElement('ul');
