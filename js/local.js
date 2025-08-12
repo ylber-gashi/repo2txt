@@ -1,6 +1,8 @@
 import { displayDirectoryStructure, sortContents, getSelectedFiles, formatRepoContents } from './utils.js';
 import { extractZipContents } from './zip-utils.js';
 
+const defaultIgnore = ['.git/**', 'node_modules/**', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.gif', '**/*.svg', '**/*.ico', '**/*.webp', '**/*.bmp', '**/*.pdf', '**/*.zip', '**/*.tar', '**/*.gz', '**/*.rar', '**/*.7z', '**/*.mp3', '**/*.mp4', '**/*.mov', '**/*.avi', '**/*.mkv', '**/*.exe', '**/*.dll', '**/*.bin'];
+
 // Add at the top of the file with other imports
 let pathZipMap = {};
 
@@ -14,7 +16,7 @@ async function handleDirectorySelection(event) {
     const files = event.target.files;
     if (files.length === 0) return;
 
-    const gitignoreContent = ['.git/**']
+    const gitignoreContent = [...defaultIgnore]
     const tree = [];
     for (let file of files) {
         const filePath = file.webkitRelativePath.startsWith('/') ? file.webkitRelativePath.slice(1) : file.webkitRelativePath;
